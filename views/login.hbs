@@ -1,0 +1,58 @@
+<section>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <img src="../image/Hospital-Playlist-01.jpg" class="w-100"
+            style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Đăng nhập</h3>
+
+            <form class="px-md-2" action="/dang-nhap" method="POST">
+              {{!-- Username input --}}
+              <div class="form-floating mb-4 form-floating">
+                <input type="text" id="username" class="form-control" name="Username" value="{{Username}}"
+                  placeholder="Username" required />
+                <label class="form-label" for="username">Username</label>
+              </div>
+
+              <p class="text-danger d-{{errWrongUsername}}">Username không tồn tại</p>
+
+              {{!-- Password input --}}
+              <div class="form-floating mb-4 form-floating">
+                <input type="password" id="password" class="form-control" value="{{Password}}" name="Password"
+                  placeholder="Mật khẩu" required />
+                <label class="form-label" for="password">Mật khẩu</label>
+              </div>
+
+              <p class="text-danger d-{{errWrongPassword}}">Mật khẩu không chính xác</p>
+
+              {{!--Role--}}
+              <div class="form-group mb-4">
+                <label>Đăng nhập với tư cách: </label>
+                <select class="form-select form-inline" aria-label="Default select example" name="role">
+                  {{#ifEquals role "patient"}}
+                  <option value="patient" selected>Bệnh nhân</option>
+                  <option value="doctor">Bác sĩ</option>
+                  {{/ifEquals}}
+                  {{#ifEquals role "doctor"}}
+                  <option value="patient">Bệnh nhân</option>
+                  <option value="doctor" selected>Bác sĩ</option>
+                  {{/ifEquals}}
+                </select>
+              </div>
+
+              {{!-- Button submit --}}
+              <button type="submit" class="btn btn-success btn-lg mb-4">Đăng nhập</button>
+
+              {{!-- Link login --}}
+              <p class="mb-1" style="color: #000;">Bạn chưa có tài khoản? Đăng ký tại <a href="/dang-ky-tai-khoan"
+                  style="color: rgb(0, 102, 255);">đây</a></p>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

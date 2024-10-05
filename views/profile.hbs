@@ -1,0 +1,303 @@
+<section style="background-color: #eee;">
+    <div class="row">
+        <div class="alert alert-success alert-dismissible fade show {{editSuccess}} mb-0" role="alert">
+            <strong>Chỉnh sửa thông tin cá nhân thành công.</strong> Bạn có thể tự kiểm tra lại.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show {{editNoSuccess}} mb-0" role="alert">
+            <strong>Chỉnh sửa thông tin cá nhân không thành công.</strong> Vui lòng kiểm tra lại.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show {{changePasswordSuccess}} mb-0" role="alert">
+            <strong>Đổi mật khẩu thành công</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show {{changePasswordNoSuccess}} mb-0" role="alert">
+            <strong>Đổi mật khẩu không thành công.</strong> Vui lòng kiểm tra lại.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="/tai-khoan">Tài khoản</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Xem chi tiết tài khoản</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{u.src}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{u.Name}}</h5>
+                        <p class="text-muted mb-1">@{{u.Username}}</p>
+                        <p class="text-muted mb-4">{{u.Address}}</p>
+                        <button type="button"><a data-bs-toggle="modal" data-bs-target="#editProfileModal"><i
+                                    class="fas fa-edit"></i></a></button>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Họ tên</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.Name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ngày sinh</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.DOB}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Giới tính</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.Gender}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.Email}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Điện thoại</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.Phone}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Địa chỉ</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{u.Address}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0"><a id="btnChangePassword" class="btn btn-secondary">Đổi mật khẩu</a></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form class="d-none mt-2" id="changePasswordForm" action="/tai-khoan" method="POST">
+                                    {{!-- New Password input --}}
+                                    <div class="form-floating mt-4 mb-4">
+                                        <input type="password" id="newpassword" class="form-control"
+                                            value="{{user.NewPassword}}" name="NewPassword" required />
+                                        <label class="form-label" for="newpassword">Mật khẩu hiện tại</label>
+                                    </div>
+                                    <p class="text-danger {{changePasswordNoSuccess}}">Mật khẩu không chính xác</p>
+                                    {{!-- Password input --}}
+                                    <div class="form-floating mt-4 mb-4">
+                                        <input type="password" id="password" class="form-control"
+                                            value="{{user.Password}}" name="Password" required />
+                                        <label class="form-label" for="password">Mật khẩu mới</label>
+                                    </div>
+                                    {{!-- Confirm password input --}}
+                                    <div class="form-floating mt-4 mb-4">
+                                        <input type="password" id="retype_password" class="form-control" name="Retype"
+                                            value="{{user.Retype}}" required />
+                                        <label class="form-label" for="retype_password">Xác nhận mật khẩu mới</label>
+                                    </div>
+                                    {{!-- Button submit --}}
+                                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="mb-4">Lịch sử khám bệnh
+                        </p>
+                        <div class="container">
+                            <table id="example" class="table table-striped"
+                                style="width:100%;background-color: aliceblue;">
+                                <thead>
+                                    <tr>
+                                        <th>Mã bệnh án</th>
+                                        <th>Ngày khám</th>
+                                        <th>Giờ khám</th>
+                                        <th>Bác sĩ khám</th>
+                                        <th>Chẩn đoán</th>
+                                        <th>Tổng chi phí</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each records}}
+                                    <tr>
+                                        <td><a href="/tai-lieu/ho-so-benh-an/{{ID}}">{{ID}}</a></td>
+                                        <td>{{Date}}</td>
+                                        <td>{{Time}}</td>
+                                        <td><a href="/bac-si/{{DoctorID}}-{{DoctorName}}">{{DoctorName}}</a></td>
+                                        <td>{{Diagnosis}}</td>
+                                        <td>{{AllTotal}}</td>
+                                    </tr>
+                                    {{/each}}
+                                <tfoot>
+                                    <tr>
+                                        <th>Mã bệnh án</th>
+                                        <th>Ngày khám</th>
+                                        <th>Giờ khám</th>
+                                        <th>Bác sĩ khám</th>
+                                        <th>Chẩn đoán</th>
+                                        <th>Tổng chi phí</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="mb-4">Phiếu hẹn khám bệnh
+                        </p>
+                        <div class="container">
+                            <table id="table_appointment" class="table table-striped"
+                                style="width:100%;background-color: aliceblue;">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày hẹn</th>
+                                        <th>Giờ hẹn</th>
+                                        <th>Bác sĩ</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each appointments}}
+                                    <tr>
+                                        <td>{{Date}}</td>
+                                        <td>{{Time}}</td>
+                                        <td><a href="/bac-si/{{ID}}-{{Doctor}}">{{Doctor}}</a></td>
+                                        <td>{{Status}}</td>
+                                    </tr>
+                                    {{/each}}
+                                <tfoot>
+                                    <tr>
+                                        <th>Ngày hẹn</th>
+                                        <th>Giờ hẹn</th>
+                                        <th>Bác sĩ</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh sửa thông tin cá nhân</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="px-md-2" id="editProfileForm" action="/tai-khoan" method="POST">
+                    {{!-- Username input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="username" class="form-control" name="Username" value="{{uu.Username}}"
+                            required />
+                        <label class="form-label" for="username">Username</label>
+                    </div>
+                    <p class="text-danger {{editNoSuccess}}">Username đã tồn tại. Vui lòng nhập Username khác</p>
+
+                    {{!-- Name input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="name" class="form-control" name="Name" value="{{uu.Name}}" required />
+                        <label class="form-label" for="name">Họ và tên</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mt-2 mb-2">
+                            {{!-- Date of birth input --}}
+                            <div class="form-floating datepicker">
+                                <input type="date" class="form-control datetimepicker-input" id="date-of-birth"
+                                    name="DOB" value="{{uu.DOBB}}" required />
+                                <label for="date-of-birth" class="form-label">Ngày sinh</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            {{!-- Sex input --}}
+                            <label class="form-label" for="sex">Giới tính</label>
+                            <div class="d-flex">
+                                <input class="form-check-input" type="radio" name="Gender" id="male" value="Nam"
+                                    {{uu.male}}>
+                                <label style="margin-left: 4px;" class="form-check-label" for="male">
+                                    Nam
+                                </label>
+                                <input style="margin-left: 20px;" class="form-check-input" type="radio" name="Gender"
+                                    id="female" value="Nữ" {{uu.female}}>
+                                <label class="form-check-label" for="female">
+                                    Nữ
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Phone number input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="phone-number" class="form-control" name="Phone" value="{{uu.Phone}}"
+                            required />
+                        <label class="form-label" for="phone-number">Số điện thoại</label>
+                    </div>
+
+                    {{!-- Email input --}}
+                    <div class="form-floating mb-4">
+                        <input type="email" id="email" class="form-control" name="Email" value="{{uu.Email}}" required/>
+                        <label class="form-label" for="email">Email</label>
+                    </div>
+
+                    {{!-- Address input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="address" class="form-control" name="Address" value="{{uu.Address}}"
+                            required />
+                        <label class="form-label" for="address">Địa chỉ</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" form="editProfileForm">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

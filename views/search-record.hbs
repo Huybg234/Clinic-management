@@ -1,0 +1,46 @@
+<div class="container">
+    <h3 class="text-center mt-2"><b>HỒ SƠ BỆNH ÁN</b></h3>
+    <table id="example" class="table table-striped" style="width:100%;background-color: aliceblue;">
+        <thead>
+            <tr>
+                <th>Mã bệnh án</th>
+                <th>Bệnh nhân</th>
+                <th>Username</th>
+                <th>Ngày khám</th>
+                <th>Giờ khám</th>
+                <th>Bác sĩ khám</th>
+                <th>ID Bác sĩ</th>
+                <th>Chẩn đoán</th>
+                <th>Tổng chi phí</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each records}}
+            <tr>
+                <td><a href="/tai-lieu/ho-so-benh-an/{{ID}}">{{ID}}</a></td>
+                <td>{{Name}}</td>
+                {{#if Username}}<td>{{Username}}</td>
+                {{else}} <td>Không có</td> {{/if}}
+                <td>{{Date}}</td>
+                <td>{{Time}}</td>
+                <td><a href="/bac-si/{{DoctorID}}-{{DoctorName}}">{{DoctorName}}</a></td>
+                <td>{{DoctorID}}</td>
+                <td>{{Diagnosis}}</td>
+                <td>{{AllTotal}}</td>
+            </tr>
+            {{/each}}
+        <tfoot>
+            <tr>
+                <th>Mã bệnh án</th>
+                <th>Bệnh nhân</th>
+                <th>Username</th>
+                <th>Ngày khám</th>
+                <th>Giờ khám</th>
+                <th>Bác sĩ khám</th>
+                <th>ID Bác sĩ</th>
+                <th>Chẩn đoán</th>
+                <th>Tổng chi phí</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

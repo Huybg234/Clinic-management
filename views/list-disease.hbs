@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{!-- <title>Thống các bệnh</title> --}}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    {{!-- <h1>Thống kê</h1> --}}
+    <form action="/tai-lieu/danh-sach-benh" method="get">
+        <label for="month">Month:</label>
+        <input type="number" id="month" name="month" min="1" max="12" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" min="2000" max="2100" required>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    <body>
+        <h1>Chi tiết thống kê</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Bệnh</th>
+                    <th>Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>{{this.count}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </body>
+</body>
+
+</html>
