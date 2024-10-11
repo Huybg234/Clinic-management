@@ -16,7 +16,7 @@
 {{/ifEquals}}
 <div class="container">
     <h3 class="text-center mt-2"><b>BẢNG GIÁ DỊCH VỤ</b></h3>
-    <table id="example" class="table table-striped" style="width:100%;background-color: aliceblue;">
+    <table id="example" class="table table-striped" style="width:100%;background-color: rgb(204, 248, 204);">
         <thead>
             <tr>
                 <th>ID</th>
@@ -36,12 +36,14 @@
                 {{#ifEquals ../role "doctor"}}
                 <td>
                     <div class="d-flex">
-                        <a type="button" class="d-block me-2" data-bs-toggle="modal" data-bs-target="#editServiceModal{{ID}}">
+                        <a type="button" class="d-block me-2" data-bs-toggle="modal"
+                            data-bs-target="#editServiceModal{{ID}}">
                             <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <a type="button" class="d-block" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ID}}">
-                            <i class="bi bi-trash3"></i>
-                        </a>
+                            </button>
+                            <a type="button" class="d-block" data-bs-toggle="modal"
+                                data-bs-target="#deleteServiceModal{{ID}}">
+                                <i class="bi bi-trash3"></i>
+                            </a>
                     </div>
                 </td>
                 {{/ifEquals}}
@@ -49,9 +51,6 @@
             {{/each}}
         <tfoot>
             <tr>
-                <th>ID</th>
-                <th>Tên dịch vụ</th>
-                <th>Giá</th>
                 {{#ifEquals role "doctor"}}
                 <th></th>
                 {{/ifEquals}}
@@ -81,8 +80,8 @@
 
                     {{!-- Unit input --}}
                     <div class="form-floating mb-4">
-                        <input type="number" id="Price{{ID}}" class="form-control" name="Price" value="{{Price}}" min="0"
-                            required />
+                        <input type="number" id="Price{{ID}}" class="form-control" name="Price" value="{{Price}}"
+                            min="0" required />
                         <label class="form-label" for="Price{{ID}}">Giá</label>
                     </div>
                 </form>

@@ -10,15 +10,15 @@
         </div>
     </div>
 
-    <div class="container-fluid p-3 mb-2 bg-light text-dark my-5 py-5">
+    <div class="container-fluid p-3 mb-2 bg-success text-dark my-5 py-5">
         <div class="container py-5">
             <div class="row gx-5">
-                <div class="col-lg-6" style="margin-left: 20px;">
+                <div class="col-lg-6 offset-lg-3"> <!-- Sử dụng offset-lg-3 để căn giữa -->
                     <div class="bg-white text-center rounded p-5">
                         <h1 class="mb-4 text-black">ĐẶT LỊCH HẸN</h1>
                         <form class="px-md-2" action="/tai-lieu/lap-phieu-hen" method="post">
                             <div class="row g-2">
-                                {{!-- Select doctors --}}
+                                <!-- Select doctors -->
                                 <div class="col-12">
                                     <select class="form-select bg-light" name="Doctor" required>
                                         <option value="">Chọn bác sĩ &#8727;</option>
@@ -28,7 +28,7 @@
                                     </select>
                                 </div>
 
-                                {{!-- Name input auto --}}
+                                <!-- Name input auto -->
                                 <div class="col-12 col-sm-6 text-start">
                                     <label class="form-label text-black" for="name">Họ và tên &#8727;</label>
                                     <input type="text" id="name" class="form-control bg-light" name="Name"
@@ -37,7 +37,7 @@
 
                                 <input class="d-none" name="Username" type="text" value="{{user.Username}}">
 
-                                {{!-- Phone input auto --}}
+                                <!-- Phone input auto -->
                                 <div class="col-12 col-sm-6 text-start">
                                     <label class="form-label text-black" for="phone-number">Số điện thoại
                                         &#8727;</label>
@@ -46,38 +46,37 @@
                                         name="Phone" value="{{user.Phone}}" required>
                                 </div>
 
-                                {{!-- Email input auto --}}
+                                <!-- Email input auto -->
                                 <div class="col-sm-12 text-start">
                                     <label class="form-label text-black" for="email">Email</label>
                                     <input type="email" id="email" class="form-control bg-light" name="Email"
                                         value="{{user.Email}}">
                                 </div>
 
-                                {{!-- Date of birth input --}}
+                                <!-- Date of birth input -->
                                 <div class="col-12 col-sm-6 text-start">
                                     <label for="date-of-birth" class="form-label text-black">Ngày sinh &#8727;</label>
                                     <input type="date" class="form-control datetimepicker-input bg-light"
                                         id="date-of-birth" name="DOB" value="{{user.DOB}}" required>
                                 </div>
 
-                                {{!-- Sex input --}}
+                                <!-- Sex input -->
                                 <div class="col-12 col-sm-6 text-start">
                                     <label class="form-label text-black" for="sex">Giới tính</label>
                                     <div class="d-flex">
-                                        <input style="margin-top: 10px;" class="form-check-input bg-light" type="radio"
-                                            name="Gender" id="male" value="Nam" {{#ifEquals user.Gender "Nam"
-                                            }}checked{{/ifEquals}}>
-                                        <label style="margin-top: 10px; margin-left: 4px;"
-                                            class="form-check-label text-black" for="male">Nam</label>
-                                        <input style="margin-top: 10px; margin-left: 20px;"
-                                            class="form-check-input bg-light" type="radio" name="Gender" id="female"
-                                            value="Nữ" {{#ifEquals user.Gender "Nữ" }}checked{{/ifEquals}}>
-                                        <label style="margin-top: 10px;" class="form-check-label text-black"
-                                            for="female">Nữ</label>
+                                        <input class="form-check-input bg-light" type="radio" name="Gender" id="male"
+                                            value="Nam" {{#ifEquals user.Gender "Nam" }}checked{{/ifEquals}}>
+                                        <label class="form-check-label text-black" for="male"
+                                            style="margin-left: 10px;">Nam</label>
+                                        <input class="form-check-input bg-light" type="radio" name="Gender" id="female"
+                                            value="Nữ" {{#ifEquals user.Gender "Nữ" }}checked{{/ifEquals}}
+                                            style="margin-left: 20px;">
+                                        <label class="form-check-label text-black" for="female"
+                                            style="margin-left: 10px;">Nữ</label>
                                     </div>
                                 </div>
 
-                                {{!-- Time appointment --}}
+                                <!-- Time appointment -->
                                 <div class="col-12 col-sm-4 text-start">
                                     <label for="time-meet" class="form-label text-black">Ngày hẹn &#8727;</label>
                                     <input type="date" class="form-control datetimepicker-input bg-light" id="date-meet"
@@ -88,9 +87,7 @@
                                     <input type="time" class="form-control datetimepicker-input bg-light" id="time-meet"
                                         name="Time" required>
                                 </div>
-                                <div class="col-sm-2"></div>
-                                {{!-- Confirm --}}
-                                <div class="col-sm-6">
+                                <div class="col-sm-12 text-start">
                                     <button class="btn btn-primary w-100 py-3" type="submit" style="margin-top: 20px;">
                                         Tạo phiếu hẹn
                                     </button>
@@ -101,18 +98,8 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="col-lg-5">
-                    <div class="mb-5">
-                        <h1 class="display-3 text-dark"><b>Tạo một phiếu hẹn cho cá nhân</b></h1>
-                    </div>
-                    <p class="text-dark mb-5">Bạn có thể được khám bệnh bởi bác sĩ mà mình mong muốn vào khung giờ hẹn.
-                        Danh sách bác sĩ dưới đây.</p>
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/tim-kiem/bac-si">Tìm bác sĩ</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
 </div>
