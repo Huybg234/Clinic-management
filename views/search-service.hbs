@@ -22,9 +22,6 @@
                 <th>ID</th>
                 <th>Tên dịch vụ</th>
                 <th>Giá</th>
-                {{#ifEquals role "doctor"}}
-                <th></th>
-                {{/ifEquals}}
             </tr>
         </thead>
         <tbody>
@@ -33,20 +30,7 @@
                 <td>{{ID}}</td>
                 <td>{{ServiceName}}</td>
                 <td>{{Price}}</td>
-                {{#ifEquals ../role "doctor"}}
-                <td>
-                    <div class="d-flex">
-                        <a type="button" class="d-block me-2" data-bs-toggle="modal"
-                            data-bs-target="#editServiceModal{{ID}}">
-                            <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <a type="button" class="d-block" data-bs-toggle="modal"
-                                data-bs-target="#deleteServiceModal{{ID}}">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                    </div>
-                </td>
-                {{/ifEquals}}
+
             </tr>
             {{/each}}
         <tfoot>

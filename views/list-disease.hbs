@@ -23,11 +23,7 @@
             margin: 20px auto;
             border-collapse: collapse;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
 
-        thead {
-            background-color: #4CAF50;
-            color: white;
         }
 
         th,
@@ -53,19 +49,18 @@
 </head>
 
 <body>
-    {{!-- <h1>Thống kê</h1> --}}
-    <form action="/tai-lieu/danh-sach-benh" method="get">
-        <label for="month">Month:</label>
-        <input type="number" id="month" name="month" min="1" max="12" required>
-
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" min="2000" max="2100" required>
-
-        <button type="submit">Generate</button>
-    </form>
 
     <body>
-        <h1>Chi tiết thống kê</h1>
+        <h1>Thống kê bệnh</h1>
+        <form action="/tai-lieu/danh-sach-benh" method="get" style="margin-left: 140px;">
+            <label for="month">Month:</label>
+            <input type="number" id="month" name="month" min="1" max="12" required>
+
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" min="2000" max="2100" required>
+
+            <button type="submit">Generate</button>
+        </form>
         <table border="1">
             <thead>
                 <tr>
