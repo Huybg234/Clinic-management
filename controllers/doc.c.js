@@ -4,9 +4,6 @@ const DrugsM = require('../model/Drugs.m');
 const ServicesM = require('../model/Services.m');
 const RecordsM = require('../model/Records.m');
 const AppointmentM = require('../model/Appointment.m');
-const PatientsInDayM = require('../model/PatientsInDay.m');
-const RevenueM = require('../model/Revenue.m');
-const DrugReportM = require('../model/Drug-Report.m');
 const NursesM = require('../model/Nurses.m');
 
 exports.createInvoice = async (req, res, next) => {
