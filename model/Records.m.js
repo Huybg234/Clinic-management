@@ -96,51 +96,51 @@ module.exports = {
         console.log(year);
         return rs;
     },
-    CountListDisease: async (month, year) => {
-        try {
-            // const startDate = new Date(year, month - 1, 1);
-            // const endDate = new Date(year, month, 1);
-            // console.log(startDate);
-            // console.log(endDate);
+    // CountListDisease: async (month, year) => {
+    //     try {
+    //         // const startDate = new Date(year, month - 1, 1);
+    //         // const endDate = new Date(year, month, 1);
+    //         // console.log(startDate);
+    //         // console.log(endDate);
 
-            const result = await db.collection('MedicalRecords').aggregate([
-                {
-                    $addFields: {
-                        // Convert 'Date' from string format 'DD/MM/YYYY' to a Date object
-                        formattedDate: {
-                            $dateFromString: {
-                                dateString: "$Date",
-                                format: "%d/%m/%Y"
-                            }
-                        }
-                    }
-                },
-                {
-                    $match: {
-                        // trang_thai: "1",
-                        formattedDate: {
-                            $gte: new Date(year, month - 1, 1),
-                            $lt: new Date(year, month, 1)
-                        }
-                    }
-                },
-                {
-                    $group: {
-                        _id: "$Diagnosis",
-                        count: { $sum: 1 }
-                    }
-                },
-                { $sort: { count: -1 } }
-            ]).toArray();
+    //         const result = await db.collection('MedicalRecords').aggregate([
+    //             {
+    //                 $addFields: {
+    //                     // Convert 'Date' from string format 'DD/MM/YYYY' to a Date object
+    //                     formattedDate: {
+    //                         $dateFromString: {
+    //                             dateString: "$Date",
+    //                             format: "%d/%m/%Y"
+    //                         }
+    //                     }
+    //                 }
+    //             },
+    //             {
+    //                 $match: {
+    //                     // trang_thai: "1",
+    //                     formattedDate: {
+    //                         $gte: new Date(year, month - 1, 1),
+    //                         $lt: new Date(year, month, 1)
+    //                     }
+    //                 }
+    //             },
+    //             {
+    //                 $group: {
+    //                     _id: "$Diagnosis",
+    //                     count: { $sum: 1 }
+    //                 }
+    //             },
+    //             { $sort: { count: -1 } }
+    //         ]).toArray();
 
-            console.log(result);
-            return result;
-        }
-        catch (err) {
-            console.error(err);
-            throw err;
-        }
-    },
+    //         console.log(result);
+    //         return result;
+    //     }
+    //     catch (err) {
+    //         console.error(err);
+    //         throw err;
+    //     }
+    // },
     calculateRevenue: async (month, year) => {
         const startDate = new Date(year, month - 1, 1); // Start of the month
         const endDate = new Date(year, month, 1); // Start of the next month
@@ -202,5 +202,58 @@ module.exports = {
     getByID: async (ID) => {
         const rs = await db.collection('MedicalRecords').find({ ID: ID }).toArray();
         return rs;
+    },
+    CountListDisease: async (month, year) => {
+        try {
+            const result = await db.collection('MedicalRecords').aggregate([
+                {
+                    $addFields: {
+                        formattedDate: {
+                            $dateFromString: {
+                                dateString: "$Date",
+                                format: "%d/%m/%Y"
+                            }
+                        }
+                    }
+                },
+                {
+                    $match: {
+                        // Lọc theo tháng và năm yêu cầu
+                        formattedDate: {
+                            $gte: new Date(year, month - 1, 1),
+                            $lt: new Date(year, month, 1)
+                        }
+                    }
+                },
+                {
+                    // Nhóm theo bệnh nhân và loại chẩn đoán (Diagnosis)
+                    $group: {
+                        _id: {
+                            username: "$Username",
+                            diagnosis: "$Diagnosis"
+                        },
+                        firstVisitDate: { $min: "$formattedDate" }  // Lấy ngày khám đầu tiên
+                    }
+                },
+                {
+                    // Sau khi loại bỏ các lần khám trùng, nhóm lại theo loại bệnh
+                    $group: {
+                        _id: "$_id.diagnosis",  // Chỉ quan tâm đến loại bệnh
+                        count: { $sum: 1 }  // Đếm số lượng bệnh nhân khác nhau
+                    }
+                },
+                {
+                    $sort: { count: -1 }
+                }
+            ]).toArray();
+
+            console.log(result);
+            return result;
+        }
+        catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
+
 }
