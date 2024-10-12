@@ -218,7 +218,6 @@ module.exports = {
                 },
                 {
                     $match: {
-                        // Lọc theo tháng và năm yêu cầu
                         formattedDate: {
                             $gte: new Date(year, month - 1, 1),
                             $lt: new Date(year, month, 1)
@@ -226,20 +225,18 @@ module.exports = {
                     }
                 },
                 {
-                    // Nhóm theo bệnh nhân và loại chẩn đoán (Diagnosis)
                     $group: {
                         _id: {
                             username: "$Username",
                             diagnosis: "$Diagnosis"
                         },
-                        firstVisitDate: { $min: "$formattedDate" }  // Lấy ngày khám đầu tiên
+                        firstVisitDate: { $min: "$formattedDate" }
                     }
                 },
                 {
-                    // Sau khi loại bỏ các lần khám trùng, nhóm lại theo loại bệnh
                     $group: {
-                        _id: "$_id.diagnosis",  // Chỉ quan tâm đến loại bệnh
-                        count: { $sum: 1 }  // Đếm số lượng bệnh nhân khác nhau
+                        _id: "$_id.diagnosis",
+                        count: { $sum: 1 }
                     }
                 },
                 {
